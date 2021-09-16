@@ -79,9 +79,47 @@
 
 
     <div class="col-sm-9">
-      <h4><small>CYMS: A Joint Project of BSP & RDCIS</small></h4>
+      <h4><small>A Joint Project of BSP & RDCIS</small></h4>
       <hr>
-      <h2>Documentation</h2>
+      <h2>A Minimalist Inventory Management System for Coils</h2>
+      <div class="container-fluid">
+        <p>
+          Each coil enters the system with following details.
+            <ul>
+              <li>Heat</li>
+              <li>Grade</li>
+              <li>Dia</li>
+              <li>Strand</li>
+              <li>Sequence</li>
+              <li>Timestamp of Label Print</li>
+              <li>Coil ID, which is unique for a coil</li>
+            </ul>
+        <p>
+          These inputs are now manually entered through an interface, and subsequently printed on a Zebra ZD230 Label Printer as QR. The labels are roughly 50 x 60 mm in size and are self-adhesive. We use thermal transfer technology for printing QR, as it is more resilient to environment.
+        <p>
+          Labels are printed in batches. Each batch retains a Heat number. Within the batch, each strand identifies each coil with a unique sequence number. So, given unique heat, with strand and sequence number, we can uniquely identify a coil. However, within the computer program, we have a provision to uniquely identify each coil with another ID.
+        <p>
+          Once labels are printed and attached to coils, next operation is to allot them to racks. This is done through <a href="./allocate_coils_to_a_rack.php"> Allocate Coils To a Rack </a>. As you know, we have 24 racks: 3-21+{M1, M2, M3, M4, M5}. Allocation of coils to racks is considered as a batch process. So typical allocation command is 'Allocate 'n' coils from 'h1' heat of dimention 'm.x' dia to 'r1' rack. So, we have to specify
+          <ul>
+            <li>Heat</li>
+            <li>Strand</li>
+            <li>From sequence</li>
+            <li>To sequence</li>
+            <li>Rack Number</li>
+          </ul>
+        <p> 
+          Each coil has an internal id. However, allocation of coils is done based on heat, grade, strand or dia. This has been chosen in line with QR Label printing.
+        <p>
+          All events are timestamped including label printing and coil dispatching. Rack allocation as of today (16 Sept 2021) is not timestamped. However, the idea is to capture all events timestamped so that we remain future-proofed.
+        <p>
+        <h3>Todo</h3>
+        <ul>
+         <li> In the home page, we will have some interesting displays of production data. </li>
+         <li> Dispatch operation may be restricted with login id and password.</li>
+         <li> More info on the operations will be added in to this page</li>
+       </ul>
+
+
       <h5>
         <span class="glyphicon glyphicon-time"></span> 
         <?php $date = date('m/d/Y h:i:s a', time()); echo $date ?> 
